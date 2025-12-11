@@ -25,18 +25,16 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Ruff (lint)
-        run: |
-          ruff check .
+        run: ruff check .
 
       - name: Run tests with pytest
-        run: |
-          python -m pytest
+        run: python -m pytest
 
   build-and-push-image:
     needs: lint-and-test
     runs-on: ubuntu-latest
     # only on pushes to main
-    if: github.ref == 'refs/heads/main' && success()
+    if: github.ref == 'refs/heads/main'
 
     steps:
       - name: Checkout repository
@@ -48,14 +46,12 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-           - name: Build and push Docker image
+      - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/ci-cd_babysteps:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/ci-cd_babysteps:${{ github.sha }}
-
-            
+            ${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-babysteps:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/ci-cd-babysteps:${{ github.sha }}
