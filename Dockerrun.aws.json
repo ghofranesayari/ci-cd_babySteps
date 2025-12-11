@@ -1,5 +1,5 @@
 {
-  "AWSEBDockerrunVersion": 1,
+  "AWSEBDockerrunVersion":"1",
   "Image": {
     "Name": "ghofranesayari/ci-cd-babysteps:latest",
     "Update": "true"
