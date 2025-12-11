@@ -1,8 +1,12 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 
 def create_app():
     app = Flask(__name__)
+
+    @app.get("/")
+    def home():
+        return render_template("index.html")
 
     @app.get("/health")
     def health():
@@ -18,3 +22,4 @@ def create_app():
         return {"received": data}, 200
 
     return app
+

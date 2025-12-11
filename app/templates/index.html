@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>CI/CD Baby Steps 🚀</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+    <div class="page">
+        <header class="hero">
+            <div class="hero-content">
+                <h1>CI/CD Baby Steps 🚀</h1>
+                <p class="subtitle">
+                    A tiny Flask app with a not-so-tiny DevOps mindset.
+                </p>
+                <p class="subtitle small">
+                    Built by an engineer learning Cloud & DevOps, one clean pipeline at a time.
+                </p>
+                <a href="#pipeline" class="hero-btn">What is a CI/CD pipeline?</a>
+            </div>
+        </header>
+
+        <main class="content">
+            <section class="section" id="pipeline">
+                <h2>What is CI/CD, really? 🤔</h2>
+                <div class="cards">
+                    <div class="card">
+                        <h3>CI – Continuous Integration</h3>
+                        <p>
+                            Every time you push code, a robot teammate checks:
+                        </p>
+                        <ul>
+                            <li>✅ Can the project still be installed?</li>
+                            <li>✅ Do the tests still pass?</li>
+                            <li>✅ Is the code style still clean?</li>
+                        </ul>
+                        <p class="highlight">
+                            If something breaks, the pipeline turns red 🔴 before the code reaches main.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>CD – Continuous Delivery / Deployment</h3>
+                        <p>
+                            Once the code is green, another robot:
+                        </p>
+                        <ul>
+                            <li>📦 Builds an artifact (here: a Docker image)</li>
+                            <li>☁️ Sends it to the cloud (Docker registry + hosting)</li>
+                            <li>🌍 Updates the running app automatically</li>
+                        </ul>
+                        <p class="highlight">
+                            Result: shipping new versions becomes <strong>boring</strong> – in a good way.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>How <span class="accent">this</span> project works ⚙️</h2>
+                <div class="timeline">
+                    <div class="step">
+                        <div class="step-badge">1</div>
+                        <div class="step-body">
+                            <h3>You push code to GitHub</h3>
+                            <p>
+                                You work locally in Flask, then push to the <code>main</code> branch
+                                (or open a pull request).
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-badge">2</div>
+                        <div class="step-body">
+                            <h3>CI kicks in (GitHub Actions)</h3>
+                            <p>
+                                GitHub spins up a clean runner and runs:
+                            </p>
+                            <ul>
+                                <li><code>ruff check .</code> for style & quality</li>
+                                <li><code>pytest</code> for automated tests</li>
+                            </ul>
+                            <p class="highlight">
+                                If this fails, nothing gets deployed. The pipeline protects you.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-badge">3</div>
+                        <div class="step-body">
+                            <h3>Docker image is built in CI</h3>
+                            <p>
+                                GitHub builds a Docker image using the <code>Dockerfile</code> and pushes it
+                                to Docker Hub, without needing Docker on your laptop.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-badge">4</div>
+                        <div class="step-body">
+                            <h3>CD deploys to the cloud</h3>
+                            <p>
+                                A final job tells the cloud platform to pull the latest image and run it.
+                                Your new version goes live automatically. 💫
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Why this is a <span class="accent">good CV project</span> 📄</h2>
+                <div class="cards">
+                    <div class="card small-card">
+                        <h3>Realistic stack</h3>
+                        <p>
+                            Flask + pytest + Ruff + Docker + GitHub Actions + Cloud.  
+                            This is <em>exactly</em> what appears in junior DevOps / Cloud job offers.
+                        </p>
+                    </div>
+                    <div class="card small-card">
+                        <h3>Clear pipeline</h3>
+                        <p>
+                            You can explain your pipeline step by step in an interview:
+                            from commit → tests → image → deploy.
+                        </p>
+                    </div>
+                    <div class="card small-card">
+                        <h3>Simple but solid</h3>
+                        <p>
+                            The app is tiny on purpose. The value is in the automation
+                            and the engineering discipline behind it.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>
+                Built with ❤️, Flask, and a lot of curiosity about DevOps.
+            </p>
+            <p class="footer-small">
+                Try the API endpoints too:
+                <code>/health</code>, <code>/message</code>, <code>/echo</code> (POST JSON).
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
