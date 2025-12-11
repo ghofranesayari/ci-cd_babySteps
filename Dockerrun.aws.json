@@ -1,7 +1,7 @@
 {
   "AWSEBDockerrunVersion": 1,
   "Image": {
-    "Name": "ghofranesayari/ci-cd_babysteps:latest",
+    "Name": "ghofranesayari/ci-cd-babysteps:latest",
     "Update": "true"
   },
   "Ports": [
