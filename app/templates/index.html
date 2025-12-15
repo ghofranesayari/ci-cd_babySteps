@@ -1,73 +1,110 @@
+<!-- app/templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>CI/CD Baby Steps 🚀</title>
+    <title>CI/CD BabySteps 🚀</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="CI/CD BabySteps — a minimal Flask app showcasing a real CI/CD pipeline: GitHub Actions → Docker Hub → AWS Elastic Beanstalk." />
 </head>
 <body>
     <div class="page">
         <header class="hero">
             <div class="hero-content">
-                <h1>CI/CD Baby Steps 🚀</h1>
+                <div class="pill-row">
+                    <span class="pill">GitHub Actions</span>
+                    <span class="pill">Docker Hub</span>
+                    <span class="pill">AWS Elastic Beanstalk</span>
+                </div>
+
+                <h1>CI/CD BabySteps 🚀</h1>
                 <p class="subtitle">
-                    A tiny Flask app with a not-so-tiny DevOps mindset.
-                    I am writing this to check if the pipeline works fine
+                    A minimal app — a real pipeline. Built to master DevOps fundamentals through practice.
                 </p>
                 <p class="subtitle small">
-                    Built by an engineer learning Cloud & DevOps, one clean pipeline at a time.
+                    The value is not the UI: it’s the delivery lifecycle behind it (tests → image → deploy → logs).
                 </p>
-                <a href="#pipeline" class="hero-btn">What is a CI/CD pipeline?</a>
+
+                <div class="hero-actions">
+                    <a href="#pipeline" class="hero-btn">Understand CI/CD</a>
+                    <a href="#project" class="hero-btn secondary">How this project ships</a>
+                </div>
+
+                <div class="hero-note">
+                    <span class="dot"></span>
+                    <p>
+                        Tip: open your GitHub Actions runs and Elastic Beanstalk logs side by side — that’s where DevOps becomes real.
+                    </p>
+                </div>
             </div>
         </header>
 
         <main class="content">
+            <!-- Section: What is CI/CD -->
             <section class="section" id="pipeline">
-                <h2>What is CI/CD, really? 🤔</h2>
+                <h2>CI/CD, explained simply 🧠</h2>
+                <p class="lead">
+                    CI/CD is the discipline of turning code into a reliable release process.
+                    It reduces “manual hero work” by making quality checks and deployments repeatable, observable, and boring.
+                </p>
+
                 <div class="cards">
                     <div class="card">
-                        <h3>CI – Continuous Integration</h3>
+                        <h3>CI — Continuous Integration</h3>
                         <p>
-                            Every time you push code, a robot teammate checks:
+                            Every push triggers automated checks in a clean environment (not your laptop):
                         </p>
                         <ul>
-                            <li>✅ Can the project still be installed?</li>
-                            <li>✅ Do the tests still pass?</li>
-                            <li>✅ Is the code style still clean?</li>
+                            <li>✅ Dependencies install successfully</li>
+                            <li>✅ Tests pass (<code>pytest</code>)</li>
+                            <li>✅ Code quality stays consistent (<code>ruff</code>)</li>
                         </ul>
                         <p class="highlight">
-                            If something breaks, the pipeline turns red 🔴 before the code reaches main.
+                            Goal: catch issues early, before they reach production.
                         </p>
                     </div>
 
                     <div class="card">
-                        <h3>CD – Continuous Delivery / Deployment</h3>
+                        <h3>CD — Continuous Delivery / Deployment</h3>
                         <p>
-                            Once the code is green, another robot:
+                            Once CI is green, the pipeline produces a deployable artifact and ships it:
                         </p>
                         <ul>
                             <li>📦 Builds an artifact (here: a Docker image)</li>
-                            <li>☁️ Sends it to the cloud (Docker registry + hosting)</li>
-                            <li>🌍 Updates the running app automatically</li>
+                            <li>🏷️ Versions it (tags like <code>latest</code> and commit SHA)</li>
+                            <li>☁️ Deploys it to a runtime (AWS Elastic Beanstalk)</li>
                         </ul>
                         <p class="highlight">
-                            Result: shipping new versions becomes <strong>boring</strong> – in a good way.
+                            Goal: shipping becomes safe, fast, and repeatable.
                         </p>
                     </div>
                 </div>
+
+                <div class="callout">
+                    <h3>Key mindset</h3>
+                    <p>
+                        A good pipeline is a contract: <strong>every change is tested</strong>, <strong>every release is traceable</strong>,
+                        and <strong>every failure is debuggable</strong> through logs.
+                    </p>
+                </div>
             </section>
 
-            <section class="section">
-                <h2>How <span class="accent">this</span> project works ⚙️</h2>
+            <!-- Section: How this project works -->
+            <section class="section" id="project">
+                <h2>How <span class="accent">this project</span> actually ships ⚙️</h2>
+                <p class="lead">
+                    This project is designed to be simple in code, but realistic in delivery — the same flow used in production teams.
+                </p>
+
                 <div class="timeline">
                     <div class="step">
                         <div class="step-badge">1</div>
                         <div class="step-body">
-                            <h3>You push code to GitHub</h3>
+                            <h3>Commit to GitHub</h3>
                             <p>
-                                You work locally in Flask, then push to the <code>main</code> branch
-                                (or open a pull request).
+                                You work locally (Flask + tests), then push to <code>main</code> or open a pull request.
+                                The pipeline is triggered automatically.
                             </p>
                         </div>
                     </div>
@@ -75,16 +112,16 @@
                     <div class="step">
                         <div class="step-badge">2</div>
                         <div class="step-body">
-                            <h3>CI kicks in (GitHub Actions)</h3>
+                            <h3>CI runs on GitHub Actions</h3>
                             <p>
-                                GitHub spins up a clean runner and runs:
+                                GitHub provisions a fresh Linux runner and executes quality gates:
                             </p>
                             <ul>
-                                <li><code>ruff check .</code> for style & quality</li>
-                                <li><code>pytest</code> for automated tests</li>
+                                <li><code>ruff check .</code> (lint & style)</li>
+                                <li><code>pytest</code> (automated tests)</li>
                             </ul>
                             <p class="highlight">
-                                If this fails, nothing gets deployed. The pipeline protects you.
+                                If CI fails, deployment is blocked. No “broken main”.
                             </p>
                         </div>
                     </div>
@@ -92,10 +129,13 @@
                     <div class="step">
                         <div class="step-badge">3</div>
                         <div class="step-body">
-                            <h3>Docker image is built in CI</h3>
+                            <h3>Docker image is built in CI </h3>
                             <p>
-                                GitHub builds a Docker image using the <code>Dockerfile</code> and pushes it
-                                to Docker Hub, without needing Docker on your laptop.
+                                Docker runs on the GitHub runner. The image is built from the <code>Dockerfile</code>,
+                                tagged (<code>latest</code> + commit SHA) and pushed to Docker Hub.
+                            </p>
+                            <p class="highlight">
+                                This is intentional: CI builds are reproducible and consistent.
                             </p>
                         </div>
                     </div>
@@ -103,39 +143,87 @@
                     <div class="step">
                         <div class="step-badge">4</div>
                         <div class="step-body">
-                            <h3>CD deploys to the cloud</h3>
+                            <h3>AWS Elastic Beanstalk pulls and runs the image</h3>
                             <p>
-                                A final job tells the cloud platform to pull the latest image and run it.
-                                Your new version goes live automatically. 💫
+                                Elastic Beanstalk reads <code>Dockerrun.aws.json</code>, pulls the image from Docker Hub,
+                                and runs the container in production on port <code>5000</code>.
+                            </p>
+                            <p class="highlight">
+                                Same logic as <code>docker pull</code> + <code>docker run</code>, but automated at scale.
                             </p>
                         </div>
                     </div>
                 </div>
+
+                <div class="callout">
+                    <h3>Traceability matters</h3>
+                    <p>
+                        Tagging images with commit SHA makes deployments auditable:
+                        you can answer “what version is running?” and roll back confidently.
+                    </p>
+                </div>
             </section>
 
-            <section class="section">
-                <h2>Why this is a <span class="accent">good CV project</span> 📄</h2>
+            <!-- Section: Why it matters -->
+            <section class="section" id="value">
+                <h2>Why this is a <span class="accent">strong DevOps project</span> 📌</h2>
+                <p class="lead">
+                    It demonstrates the core skills that DevOps roles demand: automation, artifact delivery, cloud runtime behavior, and debugging.
+                </p>
+
                 <div class="cards">
                     <div class="card small-card">
-                        <h3>Realistic stack</h3>
+                        <h3>Real lifecycle</h3>
                         <p>
-                            Flask + pytest + Ruff + Docker + GitHub Actions + Cloud.  
-                            This is <em>exactly</em> what appears in junior DevOps / Cloud job offers.
+                            From commit → CI gates → artifact (image) → deployment → logs.
+                            Not theory: a working pipeline with a running cloud environment.
                         </p>
                     </div>
+
                     <div class="card small-card">
-                        <h3>Clear pipeline</h3>
+                        <h3>Production debugging</h3>
                         <p>
-                            You can explain your pipeline step by step in an interview:
-                            from commit → tests → image → deploy.
+                            Elastic Beanstalk deployments can fail for small configuration details.
+                            This project includes real troubleshooting through AWS logs.
                         </p>
                     </div>
+
                     <div class="card small-card">
-                        <h3>Simple but solid</h3>
+                        <h3>Clear interview story</h3>
                         <p>
-                            The app is tiny on purpose. The value is in the automation
-                            and the engineering discipline behind it.
+                            You can explain the pipeline in 30 seconds or deep dive into artifacts,
+                            registries, deployment definitions, and failure modes.
                         </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: What’s next -->
+            <section class="section" id="next">
+                <h2>Next iterations (production mindset) 🔒</h2>
+                <p class="lead">
+                    This is the foundation. The next steps make it closer to real production engineering.
+                </p>
+
+                <div class="cards">
+                    <div class="card">
+                        <h3>Observability</h3>
+                        <ul>
+                            <li>📈 Centralize logs (CloudWatch)</li>
+                            <li>🩺 Health checks + structured logging</li>
+                            <li>🔎 Basic metrics: latency, error rate</li>
+                        </ul>
+                        <p class="highlight">If you can’t observe it, you can’t operate it.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Security</h3>
+                        <ul>
+                            <li>🔐 Least-privilege IAM and scoped credentials</li>
+                            <li>🧪 Secrets management (no secrets in repo)</li>
+                            <li>🛡️ Hardening: headers, dependency scanning</li>
+                        </ul>
+                        <p class="highlight">Security is part of delivery, not an afterthought.</p>
                     </div>
                 </div>
             </section>
@@ -143,11 +231,11 @@
 
         <footer class="footer">
             <p>
-                Built with ❤️, Flask, and a lot of curiosity about DevOps.
+                Built by Ghofrane — learning DevOps fundamentals through practice, one clean pipeline at a time.
             </p>
             <p class="footer-small">
-                Try the API endpoints too:
-                <code>/health</code>, <code>/message</code>, <code>/echo</code> (POST JSON).
+                Explore the endpoints:
+                <code>/health</code> • <code>/message</code> • <code>/echo</code> (POST JSON)
             </p>
         </footer>
     </div>
